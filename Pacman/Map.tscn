@@ -1,0 +1,1851 @@
+[gd_scene load_steps=29 format=2]
+
+[ext_resource path="res://Main.gd" type="Script" id=1]
+[ext_resource path="res://Music-Sounds/Dark Cave.wav" type="AudioStream" id=2]
+[ext_resource path="res://Sprite/original_maze.png" type="Texture" id=3]
+[ext_resource path="res://UD.gd" type="Script" id=4]
+[ext_resource path="res://RL.gd" type="Script" id=5]
+[ext_resource path="res://Walls.tres" type="TileSet" id=6]
+[ext_resource path="res://pellet.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Pacman.gd" type="Script" id=8]
+[ext_resource path="res://Sprite/Pacman/PMB.png" type="Texture" id=9]
+[ext_resource path="res://Sprite/Pacman/PML1.png" type="Texture" id=10]
+[ext_resource path="res://Sprite/Pacman/PML2.png" type="Texture" id=11]
+[ext_resource path="res://Sprite/Pacman/PMR1.png" type="Texture" id=12]
+[ext_resource path="res://Sprite/Pacman/PMR2.png" type="Texture" id=13]
+[ext_resource path="res://Sprite/Pacman/PMU1.png" type="Texture" id=14]
+[ext_resource path="res://Sprite/Pacman/PMU2.png" type="Texture" id=15]
+[ext_resource path="res://Sprite/Pacman/PMD1.png" type="Texture" id=16]
+[ext_resource path="res://Sprite/Pacman/PMD2.png" type="Texture" id=17]
+[ext_resource path="res://hurtbox.gd" type="Script" id=18]
+[ext_resource path="res://Sprite/Ghosts/red.tscn" type="PackedScene" id=19]
+[ext_resource path="res://Sprite/Ghosts/red1.tscn" type="PackedScene" id=20]
+[ext_resource path="res://Sprite/Ghosts/red3.tscn" type="PackedScene" id=21]
+[ext_resource path="res://Sprite/Ghosts/red2.tscn" type="PackedScene" id=22]
+
+[sub_resource type="RectangleShape2D" id=1]
+
+custom_solver_bias = 0.0
+extents = Vector2( 4, 32 )
+
+[sub_resource type="RectangleShape2D" id=2]
+
+custom_solver_bias = 0.0
+extents = Vector2( 32, 4 )
+
+[sub_resource type="CircleShape2D" id=3]
+
+custom_solver_bias = 0.0
+radius = 7.0
+
+[sub_resource type="SpriteFrames" id=4]
+
+animations = [ {
+"frames": [ ExtResource( 9 ), ExtResource( 10 ), ExtResource( 11 ) ],
+"loop": true,
+"name": "left",
+"speed": 15.0
+}, {
+"frames": [ ExtResource( 9 ), ExtResource( 12 ), ExtResource( 13 ) ],
+"loop": true,
+"name": "right",
+"speed": 15.0
+}, {
+"frames": [ ExtResource( 9 ), ExtResource( 14 ), ExtResource( 15 ) ],
+"loop": true,
+"name": "up",
+"speed": 15.0
+}, {
+"frames": [ ExtResource( 9 ), ExtResource( 16 ), ExtResource( 17 ) ],
+"loop": true,
+"name": "down",
+"speed": 15.0
+} ]
+
+[sub_resource type="RectangleShape2D" id=5]
+
+custom_solver_bias = 0.0
+extents = Vector2( 1, 1 )
+
+[sub_resource type="CircleShape2D" id=6]
+
+custom_solver_bias = 0.0
+radius = 5.0
+
+[node name="Main" type="Node" index="0"]
+
+script = ExtResource( 1 )
+
+[node name="main_sound" type="AudioStreamPlayer" parent="." index="0"]
+
+stream = ExtResource( 2 )
+volume_db = 0.0
+pitch_scale = 1.0
+autoplay = true
+mix_target = 0
+bus = "Master"
+
+[node name="Sprite" type="Sprite" parent="." index="1"]
+
+position = Vector2( 0, 64 )
+texture = ExtResource( 3 )
+centered = false
+_sections_unfolded = [ "Offset", "Visibility" ]
+
+[node name="MovementBox" type="Node" parent="." index="2"]
+
+editor/display_folded = true
+
+[node name="UD" type="Area2D" parent="MovementBox" index="0"]
+
+position = Vector2( 296, 336 )
+scale = Vector2( 0.25, 5.5 )
+input_pickable = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+collision_mask = 0
+audio_bus_override = false
+audio_bus_name = "Master"
+script = ExtResource( 4 )
+_sections_unfolded = [ "Collision" ]
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MovementBox/UD" index="0"]
+
+shape = SubResource( 1 )
+
+[node name="UD2" type="Area2D" parent="MovementBox" index="1"]
+
+position = Vector2( 152, 336 )
+scale = Vector2( 0.25, 5.5 )
+input_pickable = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+collision_mask = 0
+audio_bus_override = false
+audio_bus_name = "Master"
+script = ExtResource( 4 )
+_sections_unfolded = [ "Collision" ]
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MovementBox/UD2" index="0"]
+
+shape = SubResource( 1 )
+
+[node name="UD3" type="Area2D" parent="MovementBox" index="2"]
+
+position = Vector2( 104, 304 )
+scale = Vector2( 0.25, 6.5 )
+input_pickable = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+collision_mask = 0
+audio_bus_override = false
+audio_bus_name = "Master"
+script = ExtResource( 4 )
+_sections_unfolded = [ "Collision" ]
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MovementBox/UD3" index="0"]
+
+shape = SubResource( 1 )
+
+[node name="UD5" type="Area2D" parent="MovementBox" index="3"]
+
+position = Vector2( 344, 304 )
+scale = Vector2( 0.25, 6.5 )
+input_pickable = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+collision_mask = 0
+audio_bus_override = false
+audio_bus_name = "Master"
+script = ExtResource( 4 )
+_sections_unfolded = [ "Collision" ]
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MovementBox/UD5" index="0"]
+
+shape = SubResource( 1 )
+
+[node name="UD4" type="Area2D" parent="MovementBox" index="4"]
+
+position = Vector2( 24, 159.875 )
+scale = Vector2( 0.25, 2.00391 )
+input_pickable = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+collision_mask = 0
+audio_bus_override = false
+audio_bus_name = "Master"
+script = ExtResource( 4 )
+_sections_unfolded = [ "Collision" ]
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MovementBox/UD4" index="0"]
+
+shape = SubResource( 1 )
+
+[node name="UD14" type="Area2D" parent="MovementBox" index="5"]
+
+position = Vector2( 24, 479.938 )
+scale = Vector2( 0.25, 2.50195 )
+input_pickable = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+collision_mask = 0
+audio_bus_override = false
+audio_bus_name = "Master"
+script = ExtResource( 4 )
+_sections_unfolded = [ "Collision" ]
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MovementBox/UD14" index="0"]
+
+shape = SubResource( 1 )
+
+[node name="UD6" type="Area2D" parent="MovementBox" index="6"]
+
+position = Vector2( 424, 160 )
+scale = Vector2( 0.25, 2 )
+input_pickable = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+collision_mask = 0
+audio_bus_override = false
+audio_bus_name = "Master"
+script = ExtResource( 4 )
+_sections_unfolded = [ "Collision" ]
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MovementBox/UD6" index="0"]
+
+shape = SubResource( 1 )
+
+[node name="UD7" type="Area2D" parent="MovementBox" index="7"]
+
+position = Vector2( 200, 184 )
+scale = Vector2( 0.25, 2.74414 )
+input_pickable = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+collision_mask = 0
+audio_bus_override = false
+audio_bus_name = "Master"
+script = ExtResource( 4 )
+_sections_unfolded = [ "Collision" ]
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MovementBox/UD7" index="0"]
+
+shape = SubResource( 1 )
+
+[node name="UD8" type="Area2D" parent="MovementBox" index="8"]
+
+position = Vector2( 248, 183.906 )
+scale = Vector2( 0.25, 2.74707 )
+input_pickable = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+collision_mask = 0
+audio_bus_override = false
+audio_bus_name = "Master"
+script = ExtResource( 4 )
+_sections_unfolded = [ "Collision" ]
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MovementBox/UD8" index="0"]
+
+shape = SubResource( 1 )
+
+[node name="UD9" type="Area2D" parent="MovementBox" index="9"]
+
+position = Vector2( 248, 480 )
+scale = Vector2( 0.25, 2.49707 )
+input_pickable = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+collision_mask = 0
+audio_bus_override = false
+audio_bus_name = "Master"
+script = ExtResource( 4 )
+_sections_unfolded = [ "Collision" ]
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MovementBox/UD9" index="0"]
+
+shape = SubResource( 1 )
+
+[node name="UD13" type="Area2D" parent="MovementBox" index="10"]
+
+position = Vector2( 424, 480 )
+scale = Vector2( 0.25, 2.49707 )
+input_pickable = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+collision_mask = 0
+audio_bus_override = false
+audio_bus_name = "Master"
+script = ExtResource( 4 )
+_sections_unfolded = [ "Collision" ]
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MovementBox/UD13" index="0"]
+
+shape = SubResource( 1 )
+
+[node name="UD10" type="Area2D" parent="MovementBox" index="11"]
+
+position = Vector2( 200, 480 )
+scale = Vector2( 0.25, 2.49707 )
+input_pickable = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+collision_mask = 0
+audio_bus_override = false
+audio_bus_name = "Master"
+script = ExtResource( 4 )
+_sections_unfolded = [ "Collision" ]
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MovementBox/UD10" index="0"]
+
+shape = SubResource( 1 )
+
+[node name="UD11" type="Area2D" parent="MovementBox" index="12"]
+
+position = Vector2( 392, 480 )
+scale = Vector2( 0.25, 1 )
+input_pickable = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+collision_mask = 0
+audio_bus_override = false
+audio_bus_name = "Master"
+script = ExtResource( 4 )
+_sections_unfolded = [ "Collision" ]
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MovementBox/UD11" index="0"]
+
+shape = SubResource( 1 )
+
+[node name="UD12" type="Area2D" parent="MovementBox" index="13"]
+
+position = Vector2( 56, 480 )
+scale = Vector2( 0.25, 1 )
+input_pickable = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+collision_mask = 0
+audio_bus_override = false
+audio_bus_name = "Master"
+script = ExtResource( 4 )
+_sections_unfolded = [ "Collision" ]
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MovementBox/UD12" index="0"]
+
+shape = SubResource( 1 )
+
+[node name="RL" type="Area2D" parent="MovementBox" index="14"]
+
+position = Vector2( 224, 360 )
+scale = Vector2( 2.5, 0.25 )
+input_pickable = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+collision_mask = 0
+audio_bus_override = false
+audio_bus_name = "Master"
+script = ExtResource( 5 )
+_sections_unfolded = [ "Collision" ]
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MovementBox/RL" index="0"]
+
+shape = SubResource( 2 )
+
+[node name="RL2" type="Area2D" parent="MovementBox" index="15"]
+
+position = Vector2( 224, 408 )
+scale = Vector2( 6.5, 0.25 )
+input_pickable = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+collision_mask = 0
+audio_bus_override = false
+audio_bus_name = "Master"
+script = ExtResource( 5 )
+_sections_unfolded = [ "Collision" ]
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MovementBox/RL2" index="0"]
+
+shape = SubResource( 2 )
+
+[node name="RL3" type="Area2D" parent="MovementBox" index="16"]
+
+position = Vector2( 80, 312 )
+scale = Vector2( 2.5, 0.25 )
+input_pickable = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+collision_mask = 0
+audio_bus_override = false
+audio_bus_name = "Master"
+script = ExtResource( 5 )
+_sections_unfolded = [ "Collision", "Transform", "Z Index" ]
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MovementBox/RL3" index="0"]
+
+shape = SubResource( 2 )
+
+[node name="RL4" type="Area2D" parent="MovementBox" index="17"]
+
+position = Vector2( 368, 312 )
+scale = Vector2( 2.5, 0.25 )
+input_pickable = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+collision_mask = 0
+audio_bus_override = false
+audio_bus_name = "Master"
+script = ExtResource( 5 )
+_sections_unfolded = [ "Collision", "Transform", "Z Index" ]
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MovementBox/RL4" index="0"]
+
+shape = SubResource( 2 )
+
+[node name="RL5" type="Area2D" parent="MovementBox" index="18"]
+
+position = Vector2( 224, 264 )
+scale = Vector2( 2.5, 0.25 )
+input_pickable = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+collision_mask = 0
+audio_bus_override = false
+audio_bus_name = "Master"
+script = ExtResource( 5 )
+_sections_unfolded = [ "Collision", "Transform", "Z Index" ]
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MovementBox/RL5" index="0"]
+
+shape = SubResource( 2 )
+
+[node name="RL6" type="Area2D" parent="MovementBox" index="19"]
+
+position = Vector2( 224, 216 )
+scale = Vector2( 6.5, 0.25 )
+input_pickable = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+collision_mask = 0
+audio_bus_override = false
+audio_bus_name = "Master"
+script = ExtResource( 5 )
+_sections_unfolded = [ "Collision", "Transform", "Z Index" ]
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MovementBox/RL6" index="0"]
+
+shape = SubResource( 2 )
+
+[node name="RL9" type="Area2D" parent="MovementBox" index="20"]
+
+position = Vector2( 224, 456 )
+scale = Vector2( 6.5, 0.25 )
+input_pickable = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+collision_mask = 0
+audio_bus_override = false
+audio_bus_name = "Master"
+script = ExtResource( 5 )
+_sections_unfolded = [ "Collision", "Transform", "Z Index" ]
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MovementBox/RL9" index="0"]
+
+shape = SubResource( 2 )
+
+[node name="RL10" type="Area2D" parent="MovementBox" index="21"]
+
+position = Vector2( 224, 504 )
+scale = Vector2( 6.5, 0.25 )
+input_pickable = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+collision_mask = 0
+audio_bus_override = false
+audio_bus_name = "Master"
+script = ExtResource( 5 )
+_sections_unfolded = [ "Collision", "Transform", "Z Index" ]
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MovementBox/RL10" index="0"]
+
+shape = SubResource( 2 )
+
+[node name="RL11" type="Area2D" parent="MovementBox" index="22"]
+
+position = Vector2( 224, 552 )
+scale = Vector2( 6.5, 0.25 )
+input_pickable = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+collision_mask = 0
+audio_bus_override = false
+audio_bus_name = "Master"
+script = ExtResource( 5 )
+_sections_unfolded = [ "Collision", "Transform", "Z Index" ]
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MovementBox/RL11" index="0"]
+
+shape = SubResource( 2 )
+
+[node name="RL7" type="Area2D" parent="MovementBox" index="23"]
+
+position = Vector2( 224, 168 )
+scale = Vector2( 6.5, 0.25 )
+input_pickable = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+collision_mask = 0
+audio_bus_override = false
+audio_bus_name = "Master"
+script = ExtResource( 5 )
+_sections_unfolded = [ "Collision", "Transform", "Z Index" ]
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MovementBox/RL7" index="0"]
+
+shape = SubResource( 2 )
+
+[node name="RL8" type="Area2D" parent="MovementBox" index="24"]
+
+position = Vector2( 224, 104 )
+scale = Vector2( 6.5, 0.25 )
+input_pickable = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+collision_mask = 0
+audio_bus_override = false
+audio_bus_name = "Master"
+script = ExtResource( 5 )
+_sections_unfolded = [ "Collision", "Transform", "Z Index" ]
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MovementBox/RL8" index="0"]
+
+shape = SubResource( 2 )
+
+[node name="TileMap" type="TileMap" parent="." index="3"]
+
+mode = 0
+tile_set = ExtResource( 6 )
+cell_size = Vector2( 16, 16 )
+cell_quadrant_size = 16
+cell_custom_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+cell_half_offset = 2
+cell_tile_origin = 0
+cell_y_sort = false
+cell_clip_uv = false
+collision_use_kinematic = false
+collision_friction = 1.0
+collision_bounce = 0.0
+collision_layer = 1
+collision_mask = 1
+occluder_light_mask = 1
+format = 1
+tile_data = PoolIntArray( 327680, 0, 0, 327681, 1, 0, 327682, 1, 0, 327683, 1, 0, 327684, 1, 0, 327685, 1, 0, 327686, 1, 0, 327687, 1, 0, 327688, 1, 0, 327689, 1, 0, 327690, 1, 0, 327691, 1, 0, 327692, 1, 0, 327693, 2, 0, 327694, 536870914, 0, 327695, 1, 0, 327696, 1, 0, 327697, 1, 0, 327698, 1, 0, 327699, 1, 0, 327700, 1, 0, 327701, 1, 0, 327702, 1, 0, 327703, 1, 0, 327704, 1, 0, 327705, 1, 0, 327706, 1, 0, 327707, 536870912, 0, 393216, -1073741823, 0, 393229, 3, 0, 393230, 1610612739, 0, 393243, -1610612735, 0, 458752, -1073741823, 0, 458754, 536870916, 0, 458755, -1610612733, 0, 458756, -1610612733, 0, 458757, -536870908, 0, 458759, 536870916, 0, 458760, -1610612733, 0, 458761, -1610612733, 0, 458762, -1610612733, 0, 458763, -536870908, 0, 458765, 3, 0, 458766, 1610612739, 0, 458768, 536870916, 0, 458769, -1610612733, 0, 458770, -1610612733, 0, 458771, -1610612733, 0, 458772, -536870908, 0, 458774, 536870916, 0, 458775, -1610612733, 0, 458776, -1610612733, 0, 458777, -536870908, 0, 458779, -1610612735, 0, 524288, -1073741823, 0, 524290, 3, 0, 524293, 1610612739, 0, 524295, 3, 0, 524299, 1610612739, 0, 524301, 3, 0, 524302, 1610612739, 0, 524304, 3, 0, 524308, 1610612739, 0, 524310, 3, 0, 524313, 1610612739, 0, 524315, -1610612735, 0, 589824, -1073741823, 0, 589826, 1610612740, 0, 589827, -1073741821, 0, 589828, -1073741821, 0, 589829, -1610612732, 0, 589831, 1610612740, 0, 589832, -1073741821, 0, 589833, -1073741821, 0, 589834, -1073741821, 0, 589835, -1610612732, 0, 589837, 1610612740, 0, 589838, -1610612732, 0, 589840, 1610612740, 0, 589841, -1073741821, 0, 589842, -1073741821, 0, 589843, -1073741821, 0, 589844, -1610612732, 0, 589846, 1610612740, 0, 589847, -1073741821, 0, 589848, -1073741821, 0, 589849, -1610612732, 0, 589851, -1610612735, 0, 655360, -1073741823, 0, 655387, -1610612735, 0, 720896, -1073741823, 0, 720898, 536870916, 0, 720899, -1610612733, 0, 720900, -1610612733, 0, 720901, -536870908, 0, 720903, 536870916, 0, 720904, -536870908, 0, 720906, 536870916, 0, 720907, -1610612733, 0, 720908, -1610612733, 0, 720909, -1610612733, 0, 720910, -1610612733, 0, 720911, -1610612733, 0, 720912, -1610612733, 0, 720913, -536870908, 0, 720915, 536870916, 0, 720916, -536870908, 0, 720918, 536870916, 0, 720919, -1610612733, 0, 720920, -1610612733, 0, 720921, -536870908, 0, 720923, -1610612735, 0, 786432, -1073741823, 0, 786434, 1610612740, 0, 786435, -1073741821, 0, 786436, -1073741821, 0, 786437, -1610612732, 0, 786439, 3, 0, 786440, 1610612739, 0, 786442, 1610612740, 0, 786443, -1073741821, 0, 786444, -1073741821, 0, 786445, -536870907, 0, 786446, -1073741819, 0, 786447, -1073741821, 0, 786448, -1073741821, 0, 786449, -1610612732, 0, 786451, 3, 0, 786452, 1610612739, 0, 786454, 1610612740, 0, 786455, -1073741821, 0, 786456, -1073741821, 0, 786457, -1610612732, 0, 786459, -1610612735, 0, 851968, -1073741823, 0, 851975, 3, 0, 851976, 1610612739, 0, 851981, 3, 0, 851982, 1610612739, 0, 851987, 3, 0, 851988, 1610612739, 0, 851995, -1610612735, 0, 917504, -1073741824, 0, 917505, 1610612737, 0, 917506, 1610612737, 0, 917507, 1610612737, 0, 917508, 1610612737, 0, 917509, -536870908, 0, 917511, 3, 0, 917512, -2147483643, 0, 917513, -1610612733, 0, 917514, -1610612733, 0, 917515, -536870908, 0, 917517, 3, 0, 917518, 1610612739, 0, 917520, 536870916, 0, 917521, -1610612733, 0, 917522, -1610612733, 0, 917523, -1610612731, 0, 917524, 1610612739, 0, 917526, 536870916, 0, 917527, 1610612737, 0, 917528, 1610612737, 0, 917529, 1610612737, 0, 917530, 1610612737, 0, 917531, 1610612736, 0, 983045, -1073741823, 0, 983047, 3, 0, 983048, -1073741819, 0, 983049, -1073741821, 0, 983050, -1073741821, 0, 983051, -1610612732, 0, 983053, 1610612740, 0, 983054, -1610612732, 0, 983056, 1610612740, 0, 983057, -1073741821, 0, 983058, -1073741821, 0, 983059, -536870907, 0, 983060, 1610612739, 0, 983062, -536870911, 0, 1048581, -1073741823, 0, 1048583, 3, 0, 1048584, 1610612739, 0, 1048595, 3, 0, 1048596, 1610612739, 0, 1048598, -536870911, 0, 1114117, -1073741823, 0, 1114119, 3, 0, 1114120, 1610612739, 0, 1114122, 8, 0, 1114123, 1610612737, 0, 1114124, 6, 0, 1114127, 536870918, 0, 1114128, 1610612737, 0, 1114129, 536870920, 0, 1114131, 3, 0, 1114132, 1610612739, 0, 1114134, -536870911, 0, 1179648, 1, 0, 1179649, 1, 0, 1179650, 1, 0, 1179651, 1, 0, 1179652, 1, 0, 1179653, -1610612732, 0, 1179655, 1610612740, 0, 1179656, -1610612732, 0, 1179658, -536870911, 0, 1179665, -1073741823, 0, 1179667, 1610612740, 0, 1179668, -1610612732, 0, 1179670, 1610612740, 0, 1179671, 1, 0, 1179672, 1, 0, 1179673, 1, 0, 1179674, 1, 0, 1179675, 1, 0, 1245194, -536870911, 0, 1245201, -1073741823, 0, 1310720, 1610612737, 0, 1310721, 1610612737, 0, 1310722, 1610612737, 0, 1310723, 1610612737, 0, 1310724, 1610612737, 0, 1310725, -536870908, 0, 1310727, 536870916, 0, 1310728, -536870908, 0, 1310730, -536870911, 0, 1310737, -1073741823, 0, 1310739, 536870916, 0, 1310740, -536870908, 0, 1310742, 536870916, 0, 1310743, 1610612737, 0, 1310744, 1610612737, 0, 1310745, 1610612737, 0, 1310746, 1610612737, 0, 1310747, 1610612737, 0, 1376261, -1073741823, 0, 1376263, 3, 0, 1376264, 1610612739, 0, 1376266, 1073741832, 0, 1376267, 1, 0, 1376268, 1, 0, 1376269, 1, 0, 1376270, 1, 0, 1376271, 1, 0, 1376272, 1, 0, 1376273, 1610612744, 0, 1376275, 3, 0, 1376276, 1610612739, 0, 1376278, -1610612735, 0, 1441797, -1073741823, 0, 1441799, 3, 0, 1441800, 1610612739, 0, 1441811, 3, 0, 1441812, 1610612739, 0, 1441814, -1610612735, 0, 1507333, -1073741823, 0, 1507335, 3, 0, 1507336, 1610612739, 0, 1507338, 536870916, 0, 1507339, -1610612733, 0, 1507340, -1610612733, 0, 1507341, -1610612733, 0, 1507342, -1610612733, 0, 1507343, -1610612733, 0, 1507344, -1610612733, 0, 1507345, 4, 0, 1507347, 3, 0, 1507348, 1610612739, 0, 1507350, -1610612735, 0, 1572864, 0, 0, 1572865, 1, 0, 1572866, 1, 0, 1572867, 1, 0, 1572868, 1, 0, 1572869, -1610612732, 0, 1572871, 1610612740, 0, 1572872, -1610612732, 0, 1572874, 1610612740, 0, 1572875, -1073741821, 0, 1572876, -1073741821, 0, 1572877, -536870907, 0, 1572878, -1073741819, 0, 1572879, -1073741821, 0, 1572880, -1073741821, 0, 1572881, -1610612732, 0, 1572883, 1610612740, 0, 1572884, -1610612732, 0, 1572886, 1610612740, 0, 1572887, 1, 0, 1572888, 1, 0, 1572889, 1, 0, 1572890, 1, 0, 1572891, 536870912, 0, 1638400, -1073741823, 0, 1638413, 3, 0, 1638414, 1610612739, 0, 1638427, -1610612735, 0, 1703936, -1073741823, 0, 1703938, 536870916, 0, 1703939, -1610612733, 0, 1703940, -1610612733, 0, 1703941, -536870908, 0, 1703943, 536870916, 0, 1703944, -1610612733, 0, 1703945, -1610612733, 0, 1703946, -1610612733, 0, 1703947, -536870908, 0, 1703949, 3, 0, 1703950, 1610612739, 0, 1703952, 536870916, 0, 1703953, -1610612733, 0, 1703954, -1610612733, 0, 1703955, -1610612733, 0, 1703956, -536870908, 0, 1703958, 536870916, 0, 1703959, -1610612733, 0, 1703960, -1610612733, 0, 1703961, -536870908, 0, 1703963, -1610612735, 0, 1769472, -1073741823, 0, 1769474, 1610612740, 0, 1769475, -1073741821, 0, 1769476, -536870907, 0, 1769477, 1610612739, 0, 1769479, 1610612740, 0, 1769480, -1073741821, 0, 1769481, -1073741821, 0, 1769482, -1073741821, 0, 1769483, -1610612732, 0, 1769485, 1610612740, 0, 1769486, -1610612732, 0, 1769488, 1610612740, 0, 1769489, -1073741821, 0, 1769490, -1073741821, 0, 1769491, -1073741821, 0, 1769492, -1610612732, 0, 1769494, 3, 0, 1769495, -1073741819, 0, 1769496, -1073741821, 0, 1769497, -1610612732, 0, 1769499, -1610612735, 0, 1835008, -1073741823, 0, 1835012, 3, 0, 1835013, 1610612739, 0, 1835030, 3, 0, 1835031, 1610612739, 0, 1835035, -1610612735, 0, 1900544, -2147483646, 0, 1900545, -1610612733, 0, 1900546, -536870908, 0, 1900548, 3, 0, 1900549, 1610612739, 0, 1900551, 536870916, 0, 1900552, -536870908, 0, 1900554, 536870916, 0, 1900555, -1610612733, 0, 1900556, -1610612733, 0, 1900557, -1610612733, 0, 1900558, -1610612733, 0, 1900559, -1610612733, 0, 1900560, -1610612733, 0, 1900561, -536870908, 0, 1900563, 536870916, 0, 1900564, -536870908, 0, 1900566, 3, 0, 1900567, 1610612739, 0, 1900569, 536870916, 0, 1900570, -1610612733, 0, 1900571, -1610612734, 0, 1966080, -1073741822, 0, 1966081, -1073741821, 0, 1966082, -1610612732, 0, 1966084, 1610612740, 0, 1966085, -1610612732, 0, 1966087, 3, 0, 1966088, 1610612739, 0, 1966090, 1610612740, 0, 1966091, -1073741821, 0, 1966092, -1073741821, 0, 1966093, -536870907, 0, 1966094, -1073741819, 0, 1966095, -1073741821, 0, 1966096, -1073741821, 0, 1966097, -1610612732, 0, 1966099, 3, 0, 1966100, 1610612739, 0, 1966102, 1610612740, 0, 1966103, -1610612732, 0, 1966105, 1610612740, 0, 1966106, -1073741821, 0, 1966107, -536870910, 0, 2031616, -1073741823, 0, 2031623, 3, 0, 2031624, 1610612739, 0, 2031629, 3, 0, 2031630, 1610612739, 0, 2031635, 3, 0, 2031636, 1610612739, 0, 2031643, -1610612735, 0, 2097152, -1073741823, 0, 2097154, 536870916, 0, 2097155, -1610612733, 0, 2097156, -1610612733, 0, 2097157, -1610612733, 0, 2097158, -1610612733, 0, 2097159, -1610612731, 0, 2097160, -2147483643, 0, 2097161, -1610612733, 0, 2097162, -1610612733, 0, 2097163, -536870908, 0, 2097165, 3, 0, 2097166, 1610612739, 0, 2097168, 536870916, 0, 2097169, -1610612733, 0, 2097170, -1610612733, 0, 2097171, -1610612731, 0, 2097172, -2147483643, 0, 2097173, -1610612733, 0, 2097174, -1610612733, 0, 2097175, -1610612733, 0, 2097176, -1610612733, 0, 2097177, -536870908, 0, 2097179, -1610612735, 0, 2162688, -1073741823, 0, 2162690, 1610612740, 0, 2162691, -1073741821, 0, 2162692, -1073741821, 0, 2162693, -1073741821, 0, 2162694, -1073741821, 0, 2162695, -1073741821, 0, 2162696, -1073741821, 0, 2162697, -1073741821, 0, 2162698, -1073741821, 0, 2162699, -1610612732, 0, 2162701, 1610612740, 0, 2162702, -1610612732, 0, 2162704, 1610612740, 0, 2162705, -1073741821, 0, 2162706, -1073741821, 0, 2162707, -1073741821, 0, 2162708, -1073741821, 0, 2162709, -1073741821, 0, 2162710, -1073741821, 0, 2162711, -1073741821, 0, 2162712, -1073741821, 0, 2162713, -1610612732, 0, 2162715, -1610612735, 0, 2228224, -1073741823, 0, 2228251, -1610612735, 0, 2293760, -1073741824, 0, 2293761, 1610612737, 0, 2293762, 1610612737, 0, 2293763, 1610612737, 0, 2293764, 1610612737, 0, 2293765, 1610612737, 0, 2293766, 1610612737, 0, 2293767, 1610612737, 0, 2293768, 1610612737, 0, 2293769, 1610612737, 0, 2293770, 1610612737, 0, 2293771, 1610612737, 0, 2293772, 1610612737, 0, 2293773, 1610612737, 0, 2293774, 1610612737, 0, 2293775, 1610612737, 0, 2293776, 1610612737, 0, 2293777, 1610612737, 0, 2293778, 1610612737, 0, 2293779, 1610612737, 0, 2293780, 1610612737, 0, 2293781, 1610612737, 0, 2293782, 1610612737, 0, 2293783, 1610612737, 0, 2293784, 1610612737, 0, 2293785, 1610612737, 0, 2293786, 1610612737, 0, 2293787, -536870912, 0 )
+_sections_unfolded = [ "Cell" ]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="pellets" type="Node" parent="." index="4"]
+
+editor/display_folded = true
+
+[node name="pellet" parent="pellets" index="0" instance=ExtResource( 7 )]
+
+position = Vector2( 248, 456 )
+
+[node name="pellet2" parent="pellets" index="1" instance=ExtResource( 7 )]
+
+position = Vector2( 264, 456 )
+
+[node name="pellet3" parent="pellets" index="2" instance=ExtResource( 7 )]
+
+position = Vector2( 280, 456 )
+
+[node name="pellet4" parent="pellets" index="3" instance=ExtResource( 7 )]
+
+position = Vector2( 296, 456 )
+
+[node name="pellet5" parent="pellets" index="4" instance=ExtResource( 7 )]
+
+position = Vector2( 312, 456 )
+
+[node name="pellet6" parent="pellets" index="5" instance=ExtResource( 7 )]
+
+position = Vector2( 328, 456 )
+
+[node name="pellet7" parent="pellets" index="6" instance=ExtResource( 7 )]
+
+position = Vector2( 344, 456 )
+
+[node name="pellet8" parent="pellets" index="7" instance=ExtResource( 7 )]
+
+position = Vector2( 344, 440 )
+
+[node name="pellet9" parent="pellets" index="8" instance=ExtResource( 7 )]
+
+position = Vector2( 344, 424 )
+
+[node name="pellet10" parent="pellets" index="9" instance=ExtResource( 7 )]
+
+position = Vector2( 344, 408 )
+
+[node name="pellet11" parent="pellets" index="10" instance=ExtResource( 7 )]
+
+position = Vector2( 328, 408 )
+
+[node name="pellet12" parent="pellets" index="11" instance=ExtResource( 7 )]
+
+position = Vector2( 312, 408 )
+
+[node name="pellet13" parent="pellets" index="12" instance=ExtResource( 7 )]
+
+position = Vector2( 296, 408 )
+
+[node name="pellet14" parent="pellets" index="13" instance=ExtResource( 7 )]
+
+position = Vector2( 280, 408 )
+
+[node name="pellet15" parent="pellets" index="14" instance=ExtResource( 7 )]
+
+position = Vector2( 264, 408 )
+
+[node name="pellet16" parent="pellets" index="15" instance=ExtResource( 7 )]
+
+position = Vector2( 248, 408 )
+
+[node name="pellet17" parent="pellets" index="16" instance=ExtResource( 7 )]
+
+position = Vector2( 248, 424 )
+
+[node name="pellet18" parent="pellets" index="17" instance=ExtResource( 7 )]
+
+position = Vector2( 248, 440 )
+
+[node name="pellet19" parent="pellets" index="18" instance=ExtResource( 7 )]
+
+position = Vector2( 344, 392 )
+
+[node name="pellet20" parent="pellets" index="19" instance=ExtResource( 7 )]
+
+position = Vector2( 344, 376 )
+
+[node name="pellet21" parent="pellets" index="20" instance=ExtResource( 7 )]
+
+position = Vector2( 344, 360 )
+
+[node name="pellet22" parent="pellets" index="21" instance=ExtResource( 7 )]
+
+position = Vector2( 344, 344 )
+
+[node name="pellet23" parent="pellets" index="22" instance=ExtResource( 7 )]
+
+position = Vector2( 344, 328 )
+
+[node name="pellet24" parent="pellets" index="23" instance=ExtResource( 7 )]
+
+position = Vector2( 344, 312 )
+
+[node name="pellet25" parent="pellets" index="24" instance=ExtResource( 7 )]
+
+position = Vector2( 344, 296 )
+
+[node name="pellet26" parent="pellets" index="25" instance=ExtResource( 7 )]
+
+position = Vector2( 344, 280 )
+
+[node name="pellet27" parent="pellets" index="26" instance=ExtResource( 7 )]
+
+position = Vector2( 344, 264 )
+
+[node name="pellet28" parent="pellets" index="27" instance=ExtResource( 7 )]
+
+position = Vector2( 344, 248 )
+
+[node name="pellet29" parent="pellets" index="28" instance=ExtResource( 7 )]
+
+position = Vector2( 344, 232 )
+
+[node name="pellet30" parent="pellets" index="29" instance=ExtResource( 7 )]
+
+position = Vector2( 344, 216 )
+
+[node name="pellet31" parent="pellets" index="30" instance=ExtResource( 7 )]
+
+position = Vector2( 360, 216 )
+
+[node name="pellet32" parent="pellets" index="31" instance=ExtResource( 7 )]
+
+position = Vector2( 376, 216 )
+
+[node name="pellet33" parent="pellets" index="32" instance=ExtResource( 7 )]
+
+position = Vector2( 392, 216 )
+
+[node name="pellet34" parent="pellets" index="33" instance=ExtResource( 7 )]
+
+position = Vector2( 408, 216 )
+
+[node name="pellet35" parent="pellets" index="34" instance=ExtResource( 7 )]
+
+position = Vector2( 424, 216 )
+
+[node name="pellet36" parent="pellets" index="35" instance=ExtResource( 7 )]
+
+position = Vector2( 424, 200 )
+
+[node name="pellet37" parent="pellets" index="36" instance=ExtResource( 7 )]
+
+position = Vector2( 424, 184 )
+
+[node name="pellet38" parent="pellets" index="37" instance=ExtResource( 7 )]
+
+position = Vector2( 424, 168 )
+
+[node name="pellet39" parent="pellets" index="38" instance=ExtResource( 7 )]
+
+position = Vector2( 408, 168 )
+
+[node name="pellet40" parent="pellets" index="39" instance=ExtResource( 7 )]
+
+position = Vector2( 392, 168 )
+
+[node name="pellet41" parent="pellets" index="40" instance=ExtResource( 7 )]
+
+position = Vector2( 376, 168 )
+
+[node name="pellet42" parent="pellets" index="41" instance=ExtResource( 7 )]
+
+position = Vector2( 360, 168 )
+
+[node name="pellet43" parent="pellets" index="42" instance=ExtResource( 7 )]
+
+position = Vector2( 344, 168 )
+
+[node name="pellet44" parent="pellets" index="43" instance=ExtResource( 7 )]
+
+position = Vector2( 344, 184 )
+
+[node name="pellet45" parent="pellets" index="44" instance=ExtResource( 7 )]
+
+position = Vector2( 344, 200 )
+
+[node name="pellet46" parent="pellets" index="45" instance=ExtResource( 7 )]
+
+position = Vector2( 328, 168 )
+
+[node name="pellet47" parent="pellets" index="46" instance=ExtResource( 7 )]
+
+position = Vector2( 312, 168 )
+
+[node name="pellet48" parent="pellets" index="47" instance=ExtResource( 7 )]
+
+position = Vector2( 296, 168 )
+
+[node name="pellet49" parent="pellets" index="48" instance=ExtResource( 7 )]
+
+position = Vector2( 296, 184 )
+
+[node name="pellet50" parent="pellets" index="49" instance=ExtResource( 7 )]
+
+position = Vector2( 296, 200 )
+
+[node name="pellet51" parent="pellets" index="50" instance=ExtResource( 7 )]
+
+position = Vector2( 296, 216 )
+
+[node name="pellet52" parent="pellets" index="51" instance=ExtResource( 7 )]
+
+position = Vector2( 280, 216 )
+
+[node name="pellet53" parent="pellets" index="52" instance=ExtResource( 7 )]
+
+position = Vector2( 264, 216 )
+
+[node name="pellet54" parent="pellets" index="53" instance=ExtResource( 7 )]
+
+position = Vector2( 248, 216 )
+
+[node name="pellet55" parent="pellets" index="54" instance=ExtResource( 7 )]
+
+position = Vector2( 280, 168 )
+
+[node name="pellet56" parent="pellets" index="55" instance=ExtResource( 7 )]
+
+position = Vector2( 264, 168 )
+
+[node name="pellet57" parent="pellets" index="56" instance=ExtResource( 7 )]
+
+position = Vector2( 248, 168 )
+
+[node name="pellet58" parent="pellets" index="57" instance=ExtResource( 7 )]
+
+position = Vector2( 248, 152 )
+
+[node name="pellet59" parent="pellets" index="58" instance=ExtResource( 7 )]
+
+position = Vector2( 248, 136 )
+
+[node name="pellet60" parent="pellets" index="59" instance=ExtResource( 7 )]
+
+position = Vector2( 248, 120 )
+
+[node name="pellet61" parent="pellets" index="60" instance=ExtResource( 7 )]
+
+position = Vector2( 248, 104 )
+
+[node name="pellet62" parent="pellets" index="61" instance=ExtResource( 7 )]
+
+position = Vector2( 264, 104 )
+
+[node name="pellet63" parent="pellets" index="62" instance=ExtResource( 7 )]
+
+position = Vector2( 280, 104 )
+
+[node name="pellet64" parent="pellets" index="63" instance=ExtResource( 7 )]
+
+position = Vector2( 296, 104 )
+
+[node name="pellet65" parent="pellets" index="64" instance=ExtResource( 7 )]
+
+position = Vector2( 312, 104 )
+
+[node name="pellet66" parent="pellets" index="65" instance=ExtResource( 7 )]
+
+position = Vector2( 328, 104 )
+
+[node name="pellet67" parent="pellets" index="66" instance=ExtResource( 7 )]
+
+position = Vector2( 344, 104 )
+
+[node name="pellet68" parent="pellets" index="67" instance=ExtResource( 7 )]
+
+position = Vector2( 360, 104 )
+
+[node name="pellet69" parent="pellets" index="68" instance=ExtResource( 7 )]
+
+position = Vector2( 376, 104 )
+
+[node name="pellet70" parent="pellets" index="69" instance=ExtResource( 7 )]
+
+position = Vector2( 392, 104 )
+
+[node name="pellet71" parent="pellets" index="70" instance=ExtResource( 7 )]
+
+position = Vector2( 408, 104 )
+
+[node name="pellet72" parent="pellets" index="71" instance=ExtResource( 7 )]
+
+position = Vector2( 424, 104 )
+
+[node name="pellet73" parent="pellets" index="72" instance=ExtResource( 7 )]
+
+position = Vector2( 424, 120 )
+
+[node name="pellet74" parent="pellets" index="73" instance=ExtResource( 7 )]
+
+position = Vector2( 424, 136 )
+
+[node name="pellet75" parent="pellets" index="74" instance=ExtResource( 7 )]
+
+position = Vector2( 424, 152 )
+
+[node name="pellet76" parent="pellets" index="75" instance=ExtResource( 7 )]
+
+position = Vector2( 344, 120 )
+
+[node name="pellet77" parent="pellets" index="76" instance=ExtResource( 7 )]
+
+position = Vector2( 344, 136 )
+
+[node name="pellet78" parent="pellets" index="77" instance=ExtResource( 7 )]
+
+position = Vector2( 344, 152 )
+
+[node name="pellet79" parent="pellets" index="78" instance=ExtResource( 7 )]
+
+position = Vector2( 232, 168 )
+
+[node name="pellet80" parent="pellets" index="79" instance=ExtResource( 7 )]
+
+position = Vector2( 216, 168 )
+
+[node name="pellet81" parent="pellets" index="80" instance=ExtResource( 7 )]
+
+position = Vector2( 200, 168 )
+
+[node name="pellet82" parent="pellets" index="81" instance=ExtResource( 7 )]
+
+position = Vector2( 184, 168 )
+
+[node name="pellet83" parent="pellets" index="82" instance=ExtResource( 7 )]
+
+position = Vector2( 168, 168 )
+
+[node name="pellet84" parent="pellets" index="83" instance=ExtResource( 7 )]
+
+position = Vector2( 152, 168 )
+
+[node name="pellet85" parent="pellets" index="84" instance=ExtResource( 7 )]
+
+position = Vector2( 152, 184 )
+
+[node name="pellet86" parent="pellets" index="85" instance=ExtResource( 7 )]
+
+position = Vector2( 152, 200 )
+
+[node name="pellet87" parent="pellets" index="86" instance=ExtResource( 7 )]
+
+position = Vector2( 152, 216 )
+
+[node name="pellet88" parent="pellets" index="87" instance=ExtResource( 7 )]
+
+position = Vector2( 168, 216 )
+
+[node name="pellet89" parent="pellets" index="88" instance=ExtResource( 7 )]
+
+position = Vector2( 184, 216 )
+
+[node name="pellet90" parent="pellets" index="89" instance=ExtResource( 7 )]
+
+position = Vector2( 200, 216 )
+
+[node name="pellet91" parent="pellets" index="90" instance=ExtResource( 7 )]
+
+position = Vector2( 136, 168 )
+
+[node name="pellet92" parent="pellets" index="91" instance=ExtResource( 7 )]
+
+position = Vector2( 120, 168 )
+
+[node name="pellet93" parent="pellets" index="92" instance=ExtResource( 7 )]
+
+position = Vector2( 104, 168 )
+
+[node name="pellet94" parent="pellets" index="93" instance=ExtResource( 7 )]
+
+position = Vector2( 104, 152 )
+
+[node name="pellet95" parent="pellets" index="94" instance=ExtResource( 7 )]
+
+position = Vector2( 104, 136 )
+
+[node name="pellet96" parent="pellets" index="95" instance=ExtResource( 7 )]
+
+position = Vector2( 104, 120 )
+
+[node name="pellet97" parent="pellets" index="96" instance=ExtResource( 7 )]
+
+position = Vector2( 104, 104 )
+
+[node name="pellet98" parent="pellets" index="97" instance=ExtResource( 7 )]
+
+position = Vector2( 120, 104 )
+
+[node name="pellet99" parent="pellets" index="98" instance=ExtResource( 7 )]
+
+position = Vector2( 136, 104 )
+
+[node name="pellet100" parent="pellets" index="99" instance=ExtResource( 7 )]
+
+position = Vector2( 152, 104 )
+
+[node name="pellet101" parent="pellets" index="100" instance=ExtResource( 7 )]
+
+position = Vector2( 168, 104 )
+
+[node name="pellet102" parent="pellets" index="101" instance=ExtResource( 7 )]
+
+position = Vector2( 184, 104 )
+
+[node name="pellet103" parent="pellets" index="102" instance=ExtResource( 7 )]
+
+position = Vector2( 200, 104 )
+
+[node name="pellet104" parent="pellets" index="103" instance=ExtResource( 7 )]
+
+position = Vector2( 200, 120 )
+
+[node name="pellet105" parent="pellets" index="104" instance=ExtResource( 7 )]
+
+position = Vector2( 200, 136 )
+
+[node name="pellet106" parent="pellets" index="105" instance=ExtResource( 7 )]
+
+position = Vector2( 200, 152 )
+
+[node name="pellet107" parent="pellets" index="106" instance=ExtResource( 7 )]
+
+position = Vector2( 88, 104 )
+
+[node name="pellet108" parent="pellets" index="107" instance=ExtResource( 7 )]
+
+position = Vector2( 72, 104 )
+
+[node name="pellet109" parent="pellets" index="108" instance=ExtResource( 7 )]
+
+position = Vector2( 56, 104 )
+
+[node name="pellet110" parent="pellets" index="109" instance=ExtResource( 7 )]
+
+position = Vector2( 40, 104 )
+
+[node name="pellet111" parent="pellets" index="110" instance=ExtResource( 7 )]
+
+position = Vector2( 24, 104 )
+
+[node name="pellet112" parent="pellets" index="111" instance=ExtResource( 7 )]
+
+position = Vector2( 24, 120 )
+
+[node name="pellet113" parent="pellets" index="112" instance=ExtResource( 7 )]
+
+position = Vector2( 24, 136 )
+
+[node name="pellet114" parent="pellets" index="113" instance=ExtResource( 7 )]
+
+position = Vector2( 24, 152 )
+
+[node name="pellet115" parent="pellets" index="114" instance=ExtResource( 7 )]
+
+position = Vector2( 24, 168 )
+
+[node name="pellet116" parent="pellets" index="115" instance=ExtResource( 7 )]
+
+position = Vector2( 40, 168 )
+
+[node name="pellet117" parent="pellets" index="116" instance=ExtResource( 7 )]
+
+position = Vector2( 56, 168 )
+
+[node name="pellet118" parent="pellets" index="117" instance=ExtResource( 7 )]
+
+position = Vector2( 72, 168 )
+
+[node name="pellet119" parent="pellets" index="118" instance=ExtResource( 7 )]
+
+position = Vector2( 88, 168 )
+
+[node name="pellet120" parent="pellets" index="119" instance=ExtResource( 7 )]
+
+position = Vector2( 104, 184 )
+
+[node name="pellet121" parent="pellets" index="120" instance=ExtResource( 7 )]
+
+position = Vector2( 104, 200 )
+
+[node name="pellet122" parent="pellets" index="121" instance=ExtResource( 7 )]
+
+position = Vector2( 104, 216 )
+
+[node name="pellet123" parent="pellets" index="122" instance=ExtResource( 7 )]
+
+position = Vector2( 88, 216 )
+
+[node name="pellet124" parent="pellets" index="123" instance=ExtResource( 7 )]
+
+position = Vector2( 72, 216 )
+
+[node name="pellet125" parent="pellets" index="124" instance=ExtResource( 7 )]
+
+position = Vector2( 56, 216 )
+
+[node name="pellet126" parent="pellets" index="125" instance=ExtResource( 7 )]
+
+position = Vector2( 40, 216 )
+
+[node name="pellet127" parent="pellets" index="126" instance=ExtResource( 7 )]
+
+position = Vector2( 24, 216 )
+
+[node name="pellet128" parent="pellets" index="127" instance=ExtResource( 7 )]
+
+position = Vector2( 24, 200 )
+
+[node name="pellet129" parent="pellets" index="128" instance=ExtResource( 7 )]
+
+position = Vector2( 24, 184 )
+
+[node name="pellet130" parent="pellets" index="129" instance=ExtResource( 7 )]
+
+position = Vector2( 104, 232 )
+
+[node name="pellet131" parent="pellets" index="130" instance=ExtResource( 7 )]
+
+position = Vector2( 104, 248 )
+
+[node name="pellet132" parent="pellets" index="131" instance=ExtResource( 7 )]
+
+position = Vector2( 104, 264 )
+
+[node name="pellet133" parent="pellets" index="132" instance=ExtResource( 7 )]
+
+position = Vector2( 104, 280 )
+
+[node name="pellet134" parent="pellets" index="133" instance=ExtResource( 7 )]
+
+position = Vector2( 104, 296 )
+
+[node name="pellet135" parent="pellets" index="134" instance=ExtResource( 7 )]
+
+position = Vector2( 104, 312 )
+
+[node name="pellet136" parent="pellets" index="135" instance=ExtResource( 7 )]
+
+position = Vector2( 104, 328 )
+
+[node name="pellet137" parent="pellets" index="136" instance=ExtResource( 7 )]
+
+position = Vector2( 104, 344 )
+
+[node name="pellet138" parent="pellets" index="137" instance=ExtResource( 7 )]
+
+position = Vector2( 104, 360 )
+
+[node name="pellet139" parent="pellets" index="138" instance=ExtResource( 7 )]
+
+position = Vector2( 104, 376 )
+
+[node name="pellet140" parent="pellets" index="139" instance=ExtResource( 7 )]
+
+position = Vector2( 104, 392 )
+
+[node name="pellet141" parent="pellets" index="140" instance=ExtResource( 7 )]
+
+position = Vector2( 104, 408 )
+
+[node name="pellet142" parent="pellets" index="141" instance=ExtResource( 7 )]
+
+position = Vector2( 88, 408 )
+
+[node name="pellet143" parent="pellets" index="142" instance=ExtResource( 7 )]
+
+position = Vector2( 72, 408 )
+
+[node name="pellet144" parent="pellets" index="143" instance=ExtResource( 7 )]
+
+position = Vector2( 56, 408 )
+
+[node name="pellet145" parent="pellets" index="144" instance=ExtResource( 7 )]
+
+position = Vector2( 40, 408 )
+
+[node name="pellet146" parent="pellets" index="145" instance=ExtResource( 7 )]
+
+position = Vector2( 24, 408 )
+
+[node name="pellet147" parent="pellets" index="146" instance=ExtResource( 7 )]
+
+position = Vector2( 24, 424 )
+
+[node name="pellet148" parent="pellets" index="147" instance=ExtResource( 7 )]
+
+position = Vector2( 24, 440 )
+
+[node name="pellet149" parent="pellets" index="148" instance=ExtResource( 7 )]
+
+position = Vector2( 24, 456 )
+
+[node name="pellet150" parent="pellets" index="149" instance=ExtResource( 7 )]
+
+position = Vector2( 40, 456 )
+
+[node name="pellet151" parent="pellets" index="150" instance=ExtResource( 7 )]
+
+position = Vector2( 56, 456 )
+
+[node name="pellet152" parent="pellets" index="151" instance=ExtResource( 7 )]
+
+position = Vector2( 56, 472 )
+
+[node name="pellet153" parent="pellets" index="152" instance=ExtResource( 7 )]
+
+position = Vector2( 56, 488 )
+
+[node name="pellet154" parent="pellets" index="153" instance=ExtResource( 7 )]
+
+position = Vector2( 56, 504 )
+
+[node name="pellet155" parent="pellets" index="154" instance=ExtResource( 7 )]
+
+position = Vector2( 40, 504 )
+
+[node name="pellet156" parent="pellets" index="155" instance=ExtResource( 7 )]
+
+position = Vector2( 24, 504 )
+
+[node name="pellet157" parent="pellets" index="156" instance=ExtResource( 7 )]
+
+position = Vector2( 24, 520 )
+
+[node name="pellet158" parent="pellets" index="157" instance=ExtResource( 7 )]
+
+position = Vector2( 24, 536 )
+
+[node name="pellet159" parent="pellets" index="158" instance=ExtResource( 7 )]
+
+position = Vector2( 24, 552 )
+
+[node name="pellet160" parent="pellets" index="159" instance=ExtResource( 7 )]
+
+position = Vector2( 40, 552 )
+
+[node name="pellet161" parent="pellets" index="160" instance=ExtResource( 7 )]
+
+position = Vector2( 56, 552 )
+
+[node name="pellet162" parent="pellets" index="161" instance=ExtResource( 7 )]
+
+position = Vector2( 72, 552 )
+
+[node name="pellet163" parent="pellets" index="162" instance=ExtResource( 7 )]
+
+position = Vector2( 88, 552 )
+
+[node name="pellet164" parent="pellets" index="163" instance=ExtResource( 7 )]
+
+position = Vector2( 104, 552 )
+
+[node name="pellet165" parent="pellets" index="164" instance=ExtResource( 7 )]
+
+position = Vector2( 120, 552 )
+
+[node name="pellet166" parent="pellets" index="165" instance=ExtResource( 7 )]
+
+position = Vector2( 136, 552 )
+
+[node name="pellet167" parent="pellets" index="166" instance=ExtResource( 7 )]
+
+position = Vector2( 152, 552 )
+
+[node name="pellet168" parent="pellets" index="167" instance=ExtResource( 7 )]
+
+position = Vector2( 168, 552 )
+
+[node name="pellet169" parent="pellets" index="168" instance=ExtResource( 7 )]
+
+position = Vector2( 184, 552 )
+
+[node name="pellet170" parent="pellets" index="169" instance=ExtResource( 7 )]
+
+position = Vector2( 200, 552 )
+
+[node name="pellet171" parent="pellets" index="170" instance=ExtResource( 7 )]
+
+position = Vector2( 200, 536 )
+
+[node name="pellet172" parent="pellets" index="171" instance=ExtResource( 7 )]
+
+position = Vector2( 200, 520 )
+
+[node name="pellet173" parent="pellets" index="172" instance=ExtResource( 7 )]
+
+position = Vector2( 200, 504 )
+
+[node name="pellet174" parent="pellets" index="173" instance=ExtResource( 7 )]
+
+position = Vector2( 184, 504 )
+
+[node name="pellet175" parent="pellets" index="174" instance=ExtResource( 7 )]
+
+position = Vector2( 168, 504 )
+
+[node name="pellet176" parent="pellets" index="175" instance=ExtResource( 7 )]
+
+position = Vector2( 152, 504 )
+
+[node name="pellet177" parent="pellets" index="176" instance=ExtResource( 7 )]
+
+position = Vector2( 152, 488 )
+
+[node name="pellet178" parent="pellets" index="177" instance=ExtResource( 7 )]
+
+position = Vector2( 152, 472 )
+
+[node name="pellet179" parent="pellets" index="178" instance=ExtResource( 7 )]
+
+position = Vector2( 152, 456 )
+
+[node name="pellet180" parent="pellets" index="179" instance=ExtResource( 7 )]
+
+position = Vector2( 136, 456 )
+
+[node name="pellet181" parent="pellets" index="180" instance=ExtResource( 7 )]
+
+position = Vector2( 120, 456 )
+
+[node name="pellet182" parent="pellets" index="181" instance=ExtResource( 7 )]
+
+position = Vector2( 104, 456 )
+
+[node name="pellet183" parent="pellets" index="182" instance=ExtResource( 7 )]
+
+position = Vector2( 104, 472 )
+
+[node name="pellet184" parent="pellets" index="183" instance=ExtResource( 7 )]
+
+position = Vector2( 104, 488 )
+
+[node name="pellet185" parent="pellets" index="184" instance=ExtResource( 7 )]
+
+position = Vector2( 104, 504 )
+
+[node name="pellet186" parent="pellets" index="185" instance=ExtResource( 7 )]
+
+position = Vector2( 88, 504 )
+
+[node name="pellet187" parent="pellets" index="186" instance=ExtResource( 7 )]
+
+position = Vector2( 72, 504 )
+
+[node name="pellet188" parent="pellets" index="187" instance=ExtResource( 7 )]
+
+position = Vector2( 104, 440 )
+
+[node name="pellet189" parent="pellets" index="188" instance=ExtResource( 7 )]
+
+position = Vector2( 104, 424 )
+
+[node name="pellet190" parent="pellets" index="189" instance=ExtResource( 7 )]
+
+position = Vector2( 120, 408 )
+
+[node name="pellet191" parent="pellets" index="190" instance=ExtResource( 7 )]
+
+position = Vector2( 136, 408 )
+
+[node name="pellet192" parent="pellets" index="191" instance=ExtResource( 7 )]
+
+position = Vector2( 152, 408 )
+
+[node name="pellet193" parent="pellets" index="192" instance=ExtResource( 7 )]
+
+position = Vector2( 168, 408 )
+
+[node name="pellet194" parent="pellets" index="193" instance=ExtResource( 7 )]
+
+position = Vector2( 184, 408 )
+
+[node name="pellet195" parent="pellets" index="194" instance=ExtResource( 7 )]
+
+position = Vector2( 200, 408 )
+
+[node name="pellet196" parent="pellets" index="195" instance=ExtResource( 7 )]
+
+position = Vector2( 200, 424 )
+
+[node name="pellet197" parent="pellets" index="196" instance=ExtResource( 7 )]
+
+position = Vector2( 200, 440 )
+
+[node name="pellet198" parent="pellets" index="197" instance=ExtResource( 7 )]
+
+position = Vector2( 200, 456 )
+
+[node name="pellet199" parent="pellets" index="198" instance=ExtResource( 7 )]
+
+position = Vector2( 184, 456 )
+
+[node name="pellet200" parent="pellets" index="199" instance=ExtResource( 7 )]
+
+position = Vector2( 168, 456 )
+
+[node name="pellet201" parent="pellets" index="200" instance=ExtResource( 7 )]
+
+position = Vector2( 216, 552 )
+
+[node name="pellet202" parent="pellets" index="201" instance=ExtResource( 7 )]
+
+position = Vector2( 232, 552 )
+
+[node name="pellet203" parent="pellets" index="202" instance=ExtResource( 7 )]
+
+position = Vector2( 248, 552 )
+
+[node name="pellet204" parent="pellets" index="203" instance=ExtResource( 7 )]
+
+position = Vector2( 248, 536 )
+
+[node name="pellet205" parent="pellets" index="204" instance=ExtResource( 7 )]
+
+position = Vector2( 248, 520 )
+
+[node name="pellet206" parent="pellets" index="205" instance=ExtResource( 7 )]
+
+position = Vector2( 248, 504 )
+
+[node name="pellet207" parent="pellets" index="206" instance=ExtResource( 7 )]
+
+position = Vector2( 264, 504 )
+
+[node name="pellet208" parent="pellets" index="207" instance=ExtResource( 7 )]
+
+position = Vector2( 280, 504 )
+
+[node name="pellet209" parent="pellets" index="208" instance=ExtResource( 7 )]
+
+position = Vector2( 296, 504 )
+
+[node name="pellet210" parent="pellets" index="209" instance=ExtResource( 7 )]
+
+position = Vector2( 296, 488 )
+
+[node name="pellet211" parent="pellets" index="210" instance=ExtResource( 7 )]
+
+position = Vector2( 296, 472 )
+
+[node name="pellet212" parent="pellets" index="211" instance=ExtResource( 7 )]
+
+position = Vector2( 344, 472 )
+
+[node name="pellet213" parent="pellets" index="212" instance=ExtResource( 7 )]
+
+position = Vector2( 344, 488 )
+
+[node name="pellet214" parent="pellets" index="213" instance=ExtResource( 7 )]
+
+position = Vector2( 344, 504 )
+
+[node name="pellet215" parent="pellets" index="214" instance=ExtResource( 7 )]
+
+position = Vector2( 360, 504 )
+
+[node name="pellet216" parent="pellets" index="215" instance=ExtResource( 7 )]
+
+position = Vector2( 376, 504 )
+
+[node name="pellet217" parent="pellets" index="216" instance=ExtResource( 7 )]
+
+position = Vector2( 392, 504 )
+
+[node name="pellet218" parent="pellets" index="217" instance=ExtResource( 7 )]
+
+position = Vector2( 392, 488 )
+
+[node name="pellet219" parent="pellets" index="218" instance=ExtResource( 7 )]
+
+position = Vector2( 392, 472 )
+
+[node name="pellet220" parent="pellets" index="219" instance=ExtResource( 7 )]
+
+position = Vector2( 392, 456 )
+
+[node name="pellet221" parent="pellets" index="220" instance=ExtResource( 7 )]
+
+position = Vector2( 408, 456 )
+
+[node name="pellet222" parent="pellets" index="221" instance=ExtResource( 7 )]
+
+position = Vector2( 424, 456 )
+
+[node name="pellet223" parent="pellets" index="222" instance=ExtResource( 7 )]
+
+position = Vector2( 424, 440 )
+
+[node name="pellet224" parent="pellets" index="223" instance=ExtResource( 7 )]
+
+position = Vector2( 424, 424 )
+
+[node name="pellet225" parent="pellets" index="224" instance=ExtResource( 7 )]
+
+position = Vector2( 424, 408 )
+
+[node name="pellet226" parent="pellets" index="225" instance=ExtResource( 7 )]
+
+position = Vector2( 408, 408 )
+
+[node name="pellet227" parent="pellets" index="226" instance=ExtResource( 7 )]
+
+position = Vector2( 392, 408 )
+
+[node name="pellet228" parent="pellets" index="227" instance=ExtResource( 7 )]
+
+position = Vector2( 376, 408 )
+
+[node name="pellet229" parent="pellets" index="228" instance=ExtResource( 7 )]
+
+position = Vector2( 360, 408 )
+
+[node name="pellet230" parent="pellets" index="229" instance=ExtResource( 7 )]
+
+position = Vector2( 408, 504 )
+
+[node name="pellet231" parent="pellets" index="230" instance=ExtResource( 7 )]
+
+position = Vector2( 424, 504 )
+
+[node name="pellet232" parent="pellets" index="231" instance=ExtResource( 7 )]
+
+position = Vector2( 424, 520 )
+
+[node name="pellet233" parent="pellets" index="232" instance=ExtResource( 7 )]
+
+position = Vector2( 424, 536 )
+
+[node name="pellet234" parent="pellets" index="233" instance=ExtResource( 7 )]
+
+position = Vector2( 424, 552 )
+
+[node name="pellet235" parent="pellets" index="234" instance=ExtResource( 7 )]
+
+position = Vector2( 408, 552 )
+
+[node name="pellet236" parent="pellets" index="235" instance=ExtResource( 7 )]
+
+position = Vector2( 392, 552 )
+
+[node name="pellet237" parent="pellets" index="236" instance=ExtResource( 7 )]
+
+position = Vector2( 376, 552 )
+
+[node name="pellet238" parent="pellets" index="237" instance=ExtResource( 7 )]
+
+position = Vector2( 360, 552 )
+
+[node name="pellet239" parent="pellets" index="238" instance=ExtResource( 7 )]
+
+position = Vector2( 344, 552 )
+
+[node name="pellet240" parent="pellets" index="239" instance=ExtResource( 7 )]
+
+position = Vector2( 328, 552 )
+
+[node name="pellet241" parent="pellets" index="240" instance=ExtResource( 7 )]
+
+position = Vector2( 312, 552 )
+
+[node name="pellet242" parent="pellets" index="241" instance=ExtResource( 7 )]
+
+position = Vector2( 296, 552 )
+
+[node name="pellet243" parent="pellets" index="242" instance=ExtResource( 7 )]
+
+position = Vector2( 280, 552 )
+
+[node name="pellet244" parent="pellets" index="243" instance=ExtResource( 7 )]
+
+position = Vector2( 264, 552 )
+
+[node name="Pacman" type="KinematicBody2D" parent="." index="5"]
+
+position = Vector2( 224, 456 )
+input_pickable = false
+collision_layer = 1
+collision_mask = 1
+collision/safe_margin = 0.08
+script = ExtResource( 8 )
+_sections_unfolded = [ "Transform" ]
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Pacman" index="0"]
+
+visible = false
+shape = SubResource( 3 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="AnimatedPacman" type="AnimatedSprite" parent="Pacman" index="1"]
+
+frames = SubResource( 4 )
+animation = "right"
+frame = 1
+playing = true
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Move" type="Area2D" parent="Pacman" index="2"]
+
+visible = false
+input_pickable = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+audio_bus_override = false
+audio_bus_name = "Master"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Pacman/Move" index="0"]
+
+scale = Vector2( 0.5, 0.5 )
+shape = SubResource( 5 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="collector" type="Area2D" parent="Pacman" index="3"]
+
+editor/display_folded = true
+visible = false
+input_pickable = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+collision_mask = 0
+audio_bus_override = false
+audio_bus_name = "Master"
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Pacman/collector" index="0"]
+
+shape = SubResource( 6 )
+
+[node name="hurtbox" type="Area2D" parent="Pacman" index="4"]
+
+input_pickable = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+audio_bus_override = false
+audio_bus_name = "Master"
+script = ExtResource( 18 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Pacman/hurtbox" index="0"]
+
+shape = SubResource( 6 )
+
+[node name="red" parent="." index="6" instance=ExtResource( 19 )]
+
+position = Vector2( 294.851, 263.085 )
+
+[node name="red2" parent="." index="7" instance=ExtResource( 20 )]
+
+position = Vector2( 294.036, 351.866 )
+
+[node name="red3" parent="." index="8" instance=ExtResource( 21 )]
+
+position = Vector2( 153.054, 360.568 )
+
+[node name="red4" parent="." index="9" instance=ExtResource( 22 )]
+
+position = Vector2( 153.127, 266.343 )
+
+[connection signal="area_entered" from="MovementBox/UD" to="MovementBox/UD" method="_on_UD_area_entered"]
+
+[connection signal="area_exited" from="MovementBox/UD" to="MovementBox/UD" method="_on_UD_area_exited"]
+
+[connection signal="area_entered" from="MovementBox/UD2" to="MovementBox/UD2" method="_on_UD_area_entered"]
+
+[connection signal="area_exited" from="MovementBox/UD2" to="MovementBox/UD2" method="_on_UD_area_exited"]
+
+[connection signal="area_entered" from="MovementBox/UD3" to="MovementBox/UD3" method="_on_UD_area_entered"]
+
+[connection signal="area_exited" from="MovementBox/UD3" to="MovementBox/UD3" method="_on_UD_area_exited"]
+
+[connection signal="area_entered" from="MovementBox/UD5" to="MovementBox/UD5" method="_on_UD_area_entered"]
+
+[connection signal="area_exited" from="MovementBox/UD5" to="MovementBox/UD5" method="_on_UD_area_exited"]
+
+[connection signal="area_entered" from="MovementBox/UD4" to="MovementBox/UD4" method="_on_UD_area_entered"]
+
+[connection signal="area_exited" from="MovementBox/UD4" to="MovementBox/UD4" method="_on_UD_area_exited"]
+
+[connection signal="area_entered" from="MovementBox/UD14" to="MovementBox/UD14" method="_on_UD_area_entered"]
+
+[connection signal="area_exited" from="MovementBox/UD14" to="MovementBox/UD14" method="_on_UD_area_exited"]
+
+[connection signal="area_entered" from="MovementBox/UD6" to="MovementBox/UD6" method="_on_UD_area_entered"]
+
+[connection signal="area_exited" from="MovementBox/UD6" to="MovementBox/UD6" method="_on_UD_area_exited"]
+
+[connection signal="area_entered" from="MovementBox/UD7" to="MovementBox/UD7" method="_on_UD_area_entered"]
+
+[connection signal="area_exited" from="MovementBox/UD7" to="MovementBox/UD7" method="_on_UD_area_exited"]
+
+[connection signal="area_entered" from="MovementBox/UD8" to="MovementBox/UD8" method="_on_UD_area_entered"]
+
+[connection signal="area_exited" from="MovementBox/UD8" to="MovementBox/UD8" method="_on_UD_area_exited"]
+
+[connection signal="area_entered" from="MovementBox/UD9" to="MovementBox/UD9" method="_on_UD_area_entered"]
+
+[connection signal="area_exited" from="MovementBox/UD9" to="MovementBox/UD9" method="_on_UD_area_exited"]
+
+[connection signal="area_entered" from="MovementBox/UD13" to="MovementBox/UD13" method="_on_UD_area_entered"]
+
+[connection signal="area_exited" from="MovementBox/UD13" to="MovementBox/UD13" method="_on_UD_area_exited"]
+
+[connection signal="area_entered" from="MovementBox/UD10" to="MovementBox/UD10" method="_on_UD_area_entered"]
+
+[connection signal="area_exited" from="MovementBox/UD10" to="MovementBox/UD10" method="_on_UD_area_exited"]
+
+[connection signal="area_entered" from="MovementBox/UD11" to="MovementBox/UD11" method="_on_UD_area_entered"]
+
+[connection signal="area_exited" from="MovementBox/UD11" to="MovementBox/UD11" method="_on_UD_area_exited"]
+
+[connection signal="area_entered" from="MovementBox/UD12" to="MovementBox/UD12" method="_on_UD_area_entered"]
+
+[connection signal="area_exited" from="MovementBox/UD12" to="MovementBox/UD12" method="_on_UD_area_exited"]
+
+[connection signal="area_entered" from="MovementBox/RL" to="MovementBox/RL" method="_on_RL_area_entered"]
+
+[connection signal="area_exited" from="MovementBox/RL" to="MovementBox/RL" method="_on_RL_area_exited"]
+
+[connection signal="area_entered" from="MovementBox/RL2" to="MovementBox/RL2" method="_on_RL_area_entered"]
+
+[connection signal="area_exited" from="MovementBox/RL2" to="MovementBox/RL2" method="_on_RL_area_exited"]
+
+[connection signal="area_entered" from="MovementBox/RL3" to="MovementBox/RL3" method="_on_RL_area_entered"]
+
+[connection signal="area_exited" from="MovementBox/RL3" to="MovementBox/RL3" method="_on_RL_area_exited"]
+
+[connection signal="area_entered" from="MovementBox/RL4" to="MovementBox/RL4" method="_on_RL_area_entered"]
+
+[connection signal="area_exited" from="MovementBox/RL4" to="MovementBox/RL4" method="_on_RL_area_exited"]
+
+[connection signal="area_entered" from="MovementBox/RL5" to="MovementBox/RL5" method="_on_RL_area_entered"]
+
+[connection signal="area_exited" from="MovementBox/RL5" to="MovementBox/RL5" method="_on_RL_area_exited"]
+
+[connection signal="area_entered" from="MovementBox/RL6" to="MovementBox/RL6" method="_on_RL_area_entered"]
+
+[connection signal="area_exited" from="MovementBox/RL6" to="MovementBox/RL6" method="_on_RL_area_exited"]
+
+[connection signal="area_entered" from="MovementBox/RL9" to="MovementBox/RL9" method="_on_RL_area_entered"]
+
+[connection signal="area_exited" from="MovementBox/RL9" to="MovementBox/RL9" method="_on_RL_area_exited"]
+
+[connection signal="area_entered" from="MovementBox/RL10" to="MovementBox/RL10" method="_on_RL_area_entered"]
+
+[connection signal="area_exited" from="MovementBox/RL10" to="MovementBox/RL10" method="_on_RL_area_exited"]
+
+[connection signal="area_entered" from="MovementBox/RL11" to="MovementBox/RL11" method="_on_RL_area_entered"]
+
+[connection signal="area_exited" from="MovementBox/RL11" to="MovementBox/RL11" method="_on_RL_area_exited"]
+
+[connection signal="area_entered" from="MovementBox/RL7" to="MovementBox/RL7" method="_on_RL_area_entered"]
+
+[connection signal="area_exited" from="MovementBox/RL7" to="MovementBox/RL7" method="_on_RL_area_exited"]
+
+[connection signal="area_entered" from="MovementBox/RL8" to="MovementBox/RL8" method="_on_RL_area_entered"]
+
+[connection signal="area_exited" from="MovementBox/RL8" to="MovementBox/RL8" method="_on_RL_area_exited"]
+
+[connection signal="body_entered" from="Pacman/hurtbox" to="Pacman/hurtbox" method="_on_hurtbox_body_entered"]
+
+[connection signal="hit" from="Pacman/hurtbox" to="." method="game_over"]
+
+

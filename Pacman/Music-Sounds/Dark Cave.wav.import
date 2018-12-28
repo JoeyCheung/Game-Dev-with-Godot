@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/Dark Cave.wav-f3b3f00d94e249871dbd1be75c32bd39.sample"
+
+[deps]
+
+source_file="res://Music-Sounds/Dark Cave.wav"
+dest_files=[ "res://.import/Dark Cave.wav-f3b3f00d94e249871dbd1be75c32bd39.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=true
+edit/normalize=true
+edit/loop=false
+compress/mode=0
