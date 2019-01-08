@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/rupee.wav-38a18cdb8379dad5b2ca9b671b7db891.sample"
+
+[deps]
+
+source_file="res://pickups/rupee.wav"
+source_md5="a03e5285e2b6f4f44ef979ba9610d8d5"
+
+dest_files=[ "res://.import/rupee.wav-38a18cdb8379dad5b2ca9b671b7db891.sample" ]
+dest_md5="72d0ea046b491c1d41ea2e9b6add7c41"
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=true
+edit/normalize=true
+edit/loop=false
+compress/mode=0

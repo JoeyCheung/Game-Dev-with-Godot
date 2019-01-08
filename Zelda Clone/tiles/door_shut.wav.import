@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/door_shut.wav-767f0913c3e411bbf76c53b71aaf2905.sample"
+
+[deps]
+
+source_file="res://tiles/door_shut.wav"
+source_md5="d46b67bcee769e3bce97ad663ced21e3"
+
+dest_files=[ "res://.import/door_shut.wav-767f0913c3e411bbf76c53b71aaf2905.sample" ]
+dest_md5="b0ef0ddff78ed3d7b511064183269c28"
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=true
+edit/normalize=true
+edit/loop=false
+compress/mode=0

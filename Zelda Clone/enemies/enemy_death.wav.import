@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/enemy_death.wav-4b73a822f6744f214395ffd45cc5f7d1.sample"
+
+[deps]
+
+source_file="res://enemies/enemy_death.wav"
+source_md5="a521b264cd524f2ff3e360de21abde2f"
+
+dest_files=[ "res://.import/enemy_death.wav-4b73a822f6744f214395ffd45cc5f7d1.sample" ]
+dest_md5="0ae709a8d599f2b27a2146050f449e24"
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=true
+edit/normalize=true
+edit/loop=false
+compress/mode=0

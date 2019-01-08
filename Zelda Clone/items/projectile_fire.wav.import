@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/projectile_fire.wav-4c9651991351e6333fb9aff520137efb.sample"
+
+[deps]
+
+source_file="res://items/projectile_fire.wav"
+source_md5="293a77873888ab5ed9778dc784cf73c3"
+
+dest_files=[ "res://.import/projectile_fire.wav-4c9651991351e6333fb9aff520137efb.sample" ]
+dest_md5="eddf552d10ab45c0e7847474c45bb81b"
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=true
+edit/normalize=true
+edit/loop=false
+compress/mode=0

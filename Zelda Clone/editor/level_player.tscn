@@ -1,0 +1,23 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://editor/level_player.gd" type="Script" id=1]
+[ext_resource path="res://tiles/floor.png" type="Texture" id=2]
+
+[node name="level_player" type="Node"]
+
+script = ExtResource( 1 )
+
+[node name="floor" type="Sprite" parent="." index="0"]
+
+modulate = Color( 0.411765, 0.447059, 0.321569, 1 )
+z_index = -100
+texture = ExtResource( 2 )
+centered = false
+region_enabled = true
+region_rect = Rect2( 0, 0, 1600, 1296 )
+_sections_unfolded = [ "Material", "Offset", "Region", "Transform", "Visibility", "Z Index" ]
+__meta__ = {
+"_edit_lock_": true
+}
+
+

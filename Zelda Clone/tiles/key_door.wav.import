@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/key_door.wav-23808703446d537dc0c239acfeafeea4.sample"
+
+[deps]
+
+source_file="res://tiles/key_door.wav"
+source_md5="2f6690ee2d4a03b62e118d4ff578cd22"
+
+dest_files=[ "res://.import/key_door.wav-23808703446d537dc0c239acfeafeea4.sample" ]
+dest_md5="6d0811f8c90c2189f2623c476034c981"
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=true
+edit/normalize=true
+edit/loop=false
+compress/mode=0
